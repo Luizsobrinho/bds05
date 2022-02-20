@@ -36,6 +36,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
+	private UserDetailsService userDetailsService;
+	
+	@Autowired
 	private JwtTokenEnhancer tokenEnhancer;
 	
 	@Value("${security.oauth2.client.client-id}")
@@ -46,9 +49,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	
 	@Value("${jwt.duration}")
 	private Integer jwtDuration;
+
 	
-	@Autowired
-	private UserDetailsService userDetailsService;
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 
@@ -60,8 +62,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 		clients.inMemory()
 		.withClient(clientId)
-		.secret(passwordEnconder
-		.encode(clientSecret))
+		.secret(passwordEnconder.encode(clientSecret))
 		.scopes("read", "write")
 		.authorizedGrantTypes("password","refresh_token")
 		.accessTokenValiditySeconds(jwtDuration)

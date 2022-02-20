@@ -28,7 +28,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class User implements Serializable,UserDetails {
 
 
-	private static final long serialVersionUID = 943936328320021871L;
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -136,7 +136,7 @@ public class User implements Serializable,UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 
-		return false;
+		return true;
 	}
 
 	@Override
